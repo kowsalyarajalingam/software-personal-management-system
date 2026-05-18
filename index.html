@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login — EMS Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+  
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;     
+      justify-content: center;  
+      background-color: #ecedf3eb; 
+      font-family: 'DM Sans', sans-serif;
+      color: #0d0e10e1;
+    }
+
+    .page-wrapper {
+      width: 100%;
+      max-width: 400px; /* Prevents it from stretching across the screen */
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      margin: 0;
+      color: #121010ef;
+    }
+
+    .card {
+      background: #e0e0e3f4;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #7880a4;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      padding: 10px 14px;
+      background: #1a1e35;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      border-radius: 9px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: #5b6ef5;
+    }
+
+    select.form-control option {
+      background: #1a1e35;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #212a70;
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      font-size: 13.5px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #7c8ef9;
+    }
+
+    .card-footer {
+      text-align: center;
+      font-size: 12.5px;
+      color: #7880a4;
+      margin-top: 20px;
+    }
+
+    .card-footer a {
+      color: #5b6ef5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .card-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="brand"><h1>staff login 👩🏻‍💼</h1></div>
+    <div class="card">
+      
+      <div class="alert" id="alert-box" style="display: none; padding: 12px; border-radius: 8px; margin-bottom: 18px; text-align: center; font-size: 13px; font-weight: 600;">
+        <span id="alert-text"></span>
+      </div>
+      
+      <form action="login.php" method="POST">
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <select name="role" class="form-control">
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Enter your password" required />
+        </div>
+        <button type="submit" class="btn-primary">Sign In</button>
+      </form>
+      
+      <div class="card-footer">
+        Don't have an account? <a href="signup.html">Create one here</a>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertBox = document.getElementById('alert-box');
+    if (urlParams.has('error')) {
+      alertBox.style.display = 'block';
+      alertBox.style.background = 'rgba(248, 113, 113, 0.12)';
+      alertBox.style.color = '#f87171';
+      alertBox.style.border = '1px solid rgba(248, 113, 113, 0.3)';
+      document.getElementById('alert-text').textContent = urlParams.get('error');
+    } else if (urlParams.has('success')) {
+      alertBox.style.display = 'block';
+      alertBox.style.background = 'rgba(52, 211, 153, 0.12)';
+      alertBox.style.color = '#34d399';
+      alertBox.style.border = '1px solid rgba(52, 211, 153, 0.3)';
+      document.getElementById('alert-text').textContent = urlParams.get('success');
+    }
+  </script>
+</body>
+</html>
